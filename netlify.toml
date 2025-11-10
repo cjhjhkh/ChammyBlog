@@ -1,4 +1,4 @@
 [build]
-base = "ChammyBlog" # Hexo 项目所在目录
+base = "" # 项目根目录
 publish = "public" # 部署的静态文件目录
 command = "hexo generate" # 构建命令
