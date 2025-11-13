@@ -1,0 +1,443 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>flex | Chammy's Blog</title><meta name="author" content="Chammy"><meta name="copyright" content="Chammy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="概念：flex是flexible Box的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性，任何一个容器都可以指定为flex布局。  当我们为父盒子设为flex布局以后，子元素的 float 、clear和vertical-align属性将失效 伸缩布局&#x3D;弹性布局&#x3D;伸缩盒布局&#x3D;弹性盒布局&#x3D;flex布局  主轴与侧轴在flex布局中，是分为主轴和侧轴两个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="flex">
+<meta property="og:url" content="https://chammmmy.netlify.app/2025/11/12/flex/index.html">
+<meta property="og:site_name" content="Chammy&#39;s Blog">
+<meta property="og:description" content="概念：flex是flexible Box的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性，任何一个容器都可以指定为flex布局。  当我们为父盒子设为flex布局以后，子元素的 float 、clear和vertical-align属性将失效 伸缩布局&#x3D;弹性布局&#x3D;伸缩盒布局&#x3D;弹性盒布局&#x3D;flex布局  主轴与侧轴在flex布局中，是分为主轴和侧轴两个">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://chammmmy.netlify.app/image/wechat.jpg">
+<meta property="article:published_time" content="2025-11-12T05:36:49.723Z">
+<meta property="article:modified_time" content="2025-11-12T17:20:47.905Z">
+<meta property="article:author" content="Chammy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chammmmy.netlify.app/image/wechat.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "flex",
+  "url": "https://chammmmy.netlify.app/2025/11/12/flex/",
+  "image": "https://chammmmy.netlify.app/image/wechat.jpg",
+  "datePublished": "2025-11-12T05:36:49.723Z",
+  "dateModified": "2025-11-12T17:20:47.905Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Chammy",
+      "url": "https://chammmmy.netlify.app"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://chammmmy.netlify.app/2025/11/12/flex/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.2"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'flex',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/image/avatar1.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(/image/wechat.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Chammy's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">flex</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">flex</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-11-12T05:36:49.723Z" title="发表于 2025-11-12 13:36:49">2025-11-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-11-12T17:20:47.905Z" title="更新于 2025-11-13 01:20:47">2025-11-13</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h2><p>flex是flexible Box的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性，任何一个容器都可以指定为flex布局。</p>
+<ul>
+<li>当我们为父盒子设为flex布局以后，<strong>子元素的</strong> <strong>float</strong> <strong>、clear和vertical-align属性将失效</strong></li>
+<li>伸缩布局&#x3D;弹性布局&#x3D;伸缩盒布局&#x3D;弹性盒布局&#x3D;flex布局</li>
+</ul>
+<h4 id="主轴与侧轴"><a href="#主轴与侧轴" class="headerlink" title="主轴与侧轴"></a>主轴与侧轴</h4><p>在flex布局中，是分为主轴和侧轴两个方向，同样的叫法有：行和列、x轴和y轴</p>
+<ul>
+<li>默认主轴方向就是x轴方向，水平向右</li>
+<li>默认侧轴方向就是y轴方向，水平向下</li>
+</ul>
+<blockquote>
+<p>注意：主轴和侧轴是会变化的，flex-direction属性决定主轴的方向(即项目的排列方向)，就看flex-direction 设置谁为主轴，剩下的就是侧轴。而我们的子元素是跟着主轴来排列的</p>
+</blockquote>
+<h2 id="布局原理"><a href="#布局原理" class="headerlink" title="布局原理"></a>布局原理</h2><p>采用Flex布局的元素，称为Flex容器(flexcontainer)，简称”容器”。它的所有子元素自动成为容器成员，称为Flex项目(flexitem)，简称”项目”。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">    display: flex;</span><br><span class="line">    width: 80%;</span><br><span class="line">    height: 300px;</span><br><span class="line">    background-color:Dpink;</span><br><span class="line">    justify-content:space-around;</span><br><span class="line">&#125;</span><br><span class="line">div span &#123;</span><br><span class="line">    /*width:150px;*/</span><br><span class="line">    height: 100px;</span><br><span class="line">    background-color:purple;</span><br><span class="line">    margin-right: 5px;</span><br><span class="line">    flex: 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这里div就是flex父容器  体验中span就是子容器flex项目</p>
+</blockquote>
+<p>子容器可以横向排列也可以纵向排列</p>
+<h3 id="总结flex布局原理"><a href="#总结flex布局原理" class="headerlink" title="总结flex布局原理:"></a>总结flex布局原理:</h3><p><strong>通过给父盒子添加flex属性，来控制子盒子的位置和排列方式</strong></p>
+<h2 id="常见属性"><a href="#常见属性" class="headerlink" title="常见属性"></a>常见属性</h2><h3 id="对父容器设置："><a href="#对父容器设置：" class="headerlink" title="对父容器设置："></a>对父容器设置：</h3><ol>
+<li><strong>flex-direction 设置主轴的方向</strong></li>
+</ol>
+<ul>
+<li><p>row 默认值从左到右</p>
+</li>
+<li><p>row-reverse 从右到左</p>
+</li>
+<li><p>column 从上到下</p>
+</li>
+<li><p>column-reverse 从下到上</p>
+</li>
+</ul>
+<ol start="2">
+<li><strong>justify-content</strong> 设置主轴上的子元素排列方式</li>
+</ol>
+<p>justify-content属性定义了项目在主轴上的<strong>对齐方式</strong></p>
+<blockquote>
+<p>注意:使用这个属性之前一定要<strong>确定好主轴是哪个</strong></p>
+</blockquote>
+<ul>
+<li><p>flex-start：默认值，从头部开始，如果主轴是x轴，则从左到右</p>
+</li>
+<li><p>flex-end：从尾部开始排列</p>
+</li>
+<li><p>center：在主轴<strong>居中对齐</strong>(如果主轴是x轴则水平居中)</p>
+</li>
+<li><p>space-around：平分剩余空间</p>
+</li>
+<li><p>space-between：先两边贴边，再平分剩余空间(重要)</p>
+</li>
+</ul>
+<ol start="3">
+<li><strong>flex-wrap</strong> 设置子元素是否换行</li>
+</ol>
+<p>默认情况下，项目都排在一条线(又称“轴线”)上。flex-wrap属性定义，flex布局中默认是不换行的</p>
+<ul>
+<li><p>nowrap：默认值，不换行</p>
+</li>
+<li><p>wrap：换行</p>
+</li>
+<li><p>wrap-reverse：换行，第一行在下方</p>
+</li>
+</ul>
+<ol start="4">
+<li><strong>align-items</strong> 设置侧轴上的子元素排列方式(单行)</li>
+</ol>
+<p>该属性是控制子项在侧轴(默认是y轴)上的排列方式在子项为单项的时候使用</p>
+<ul>
+<li><p>flex-start：默认值 从上到下</p>
+</li>
+<li><p>flex-end：从下到上</p>
+</li>
+<li><p>center：挤在一起居中( 垂直居中 )</p>
+</li>
+<li><p>baseline: 项目的第一行文字的基线对齐。</p>
+</li>
+<li><p>stretch：拉伸</p>
+</li>
+</ul>
+<ol start="5">
+<li><strong>align-content</strong> 设置侧轴上的子元素的排列方式(多行)</li>
+</ol>
+<p>设置子项在侧轴上的排列方式并且只能用于<strong>子项出现换行</strong>的情况(多行)，在单行下是没有效果的。</p>
+<ul>
+<li><p>flex-start：默认值在侧轴的头部开始排列</p>
+</li>
+<li><p>flex-end：在侧轴的尾部开始排列</p>
+</li>
+<li><p>center：在侧轴中间显示</p>
+</li>
+<li><p>stretch：设置子项元素高度平分父元素高度</p>
+</li>
+<li><p>space-around：子项在侧轴平分剩余空间</p>
+</li>
+<li><p>space-between：子项在侧轴先分布在两头，再平分剩余空间</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>align-content 和 align-items 区别</strong></p>
+<p>align-items 适用于单行情况下，只有上对齐、下对齐、居中和拉伸</p>
+<p>align-content适应于换行(多行)的情况下(单行情况下无效)，可以设置上对齐、下对齐、居中、拉伸以及平均分配剩余空等属性值。</p>
+</blockquote>
+<blockquote>
+<p>总结就是 单行找align-items ，多行 <strong>（换行）</strong> <strong>找align-content</strong></p>
+</blockquote>
+<ol start="6">
+<li><strong>flex-flow</strong> flex-direction和flex-wrap 属性的复合属性</li>
+</ol>
+<ul>
+<li>flex-flow:row wrap;</li>
+</ul>
+<h3 id="对子容器设置："><a href="#对子容器设置：" class="headerlink" title="对子容器设置："></a>对子容器设置：</h3><ol>
+<li>flex属性定义子项目分配<strong>剩余空间</strong>，用flex来表示占多少<strong>份数</strong></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.item &#123;</span><br><span class="line">    flex:&lt;number&gt;; /* default 0 */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>align-self 控制子项<strong>自己在侧轴上的排列方式</strong></li>
+</ol>
+<ul>
+<li>align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性</li>
+<li>默认值为auto，表示继承父素的align-items属性</li>
+<li>如果没有父元素，则等同于stretch</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">span:nth-child(2) &#123;</span><br><span class="line">    /*设置自己在侧轴上的排列方式*/</span><br><span class="line">    align-self: flex-end;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>order 属性定义项目的<strong>排列顺序</strong></li>
+</ol>
+<p>数值越小，排列越靠前，默认为0</p>
+<blockquote>
+<p>注意：和z-index不一样。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">div span:nth-child(2)&#123;</span><br><span class="line">  /*默认是0    -1比0小所以在前面*/</span><br><span class="line">  order: -1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><table>
+<thead>
+<tr>
+<th>对父容器设置的属性</th>
+<th>作用</th>
+<th>属性值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>flex-direction</td>
+<td>设置<strong>主轴的方向</strong></td>
+<td>row 默认值从左到右<br>row-reverse 从右到左<br>column 从上到下<br>column-reverse 从下到上<br></td>
+</tr>
+<tr>
+<td>justify-content</td>
+<td>设置主轴上的<strong>子元素排列方式</strong>&gt; 注意:使用这个属性之前一定要<strong>确定好主轴是哪个</strong></td>
+<td>flex-start：默认值，从头部开始，如果主轴是x轴，则从左到右<br>flex-end：从尾部开始排列<br>center：在主轴<strong>居中对齐</strong>(如果主轴是x轴则水平居中)<br>space-around：平分剩余空间<br>space-between：先两边贴边，再平分剩余空间(重要)<br></td>
+</tr>
+<tr>
+<td>flex-wrap</td>
+<td>设置子元素<strong>是否换行</strong></td>
+<td>nowrap：默认值，不换行<br>wrap：换行<br>wrap-reverse：换行，第一行在下方<br></td>
+</tr>
+<tr>
+<td>align-content</td>
+<td>设置侧轴上的子素的<strong>排列方式(多行)</strong></td>
+<td>flex-start：默认值在侧轴的头部开始排列<br>flex-end：在侧轴的尾部开始排列<br>center：在侧轴中间显示<br>stretch：设置子项元素高度平分父元素高度<br>space-around：子项在侧轴平分剩余空间<br>space-between：子项在侧轴先分布在两头，再平分剩余空间<br></td>
+</tr>
+<tr>
+<td>align-items</td>
+<td>设置侧轴上的子元素<strong>排列方式(单行)</strong></td>
+<td>flex-start：默认值 从上到下<br>flex-end：从下到上<br>center：挤在一起居中( 垂直居中 )<br>baseline: 项目的第一行文字的基线对齐。<br>stretch：拉伸<br></td>
+</tr>
+<tr>
+<td>flex-flow</td>
+<td><strong>复合属性</strong>，相当于<strong>同时设置了flex-direction和flex-wrap</strong></td>
+<td>flex-flow:row wrap;<br></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>对子容器设置的属性</th>
+<th>作用</th>
+<th>属性值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>flex-grow</strong></td>
+<td>flex-grow属性定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。</td>
+<td>flex-grow: <number>; <em>&#x2F;</em> default 0 <em>&#x2F;<br></em></td>
+</tr>
+<tr>
+<td><strong>flex-shrink</strong></td>
+<td>flex-shrink属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。</td>
+<td>flex-shrink: <number>; <em>&#x2F;</em> default 1 <em>&#x2F;<br></em></td>
+</tr>
+<tr>
+<td><strong>flex-basis</strong></td>
+<td>设置Flex项在主轴上的<strong>初始大小</strong>，可以是具体的长度值或百分比</td>
+<td>flex-basis: <length>auto; <em>&#x2F;</em> default auto <em>&#x2F;<br></em></td>
+</tr>
+<tr>
+<td>flex</td>
+<td>定义子项目分配<strong>剩余空间</strong>，用flex来表示占多少<strong>份数</strong>&gt; flex属性是flex-grow、flex-shrink 和 flex-basis的简写，默认值为0 1 auto</td>
+<td>flex:<number><br></td>
+</tr>
+<tr>
+<td>align-self</td>
+<td>控制子项<strong>自己在侧轴上的排列方式</strong></td>
+<td>align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性<br>默认值为auto，表示继承父素的align-items属性<br>如果没有父元素，则等同于stretch<br></td>
+</tr>
+<tr>
+<td>order</td>
+<td>定义项目的<strong>排列顺序</strong></td>
+<td>order: -1;<br>数值越小，排列越靠前，默认为0<br></td>
+</tr>
+</tbody></table>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><h3 id="为什么用flex布局？"><a href="#为什么用flex布局？" class="headerlink" title="为什么用flex布局？"></a>为什么用flex布局？</h3><p> 它为开发者提供了一种<strong>更高效</strong>、<strong>更灵活</strong>、<strong>响应式</strong>地来处理网页布局</p>
+<blockquote>
+<ol>
+<li><strong>灵活性</strong>：Flex布局提供了高度的灵活性，可以轻松适应不同的屏幕尺寸和方向，是响应式设计的理想选择。</li>
+<li><strong>简化的布局语法</strong>：Flex布局使用简单的CSS属性来定义复杂的布局结构，减少了以往需要的复杂和冗长的CSS代码。</li>
+<li><strong>自动尺寸调整</strong>：Flex项可以自动调整大小以适应其内容或分配给它们的空间，简化了布局的维护。</li>
+<li><strong>高效的对齐控制</strong>：Flex布局允许开发者轻松地在主轴和交叉轴上对齐项目，包括垂直和水平居中。</li>
+<li><strong>空间分配</strong>：Flex布局可以智能地在项目之间分配额外的空间，提供了<code>justify-content</code>和<code>align-items</code>等属性来控制布局的对齐和分布。</li>
+<li><strong>无需浮动</strong>：Flex布局提供了一种不依赖于<code>float</code>的布局方式，避免了与浮动相关的常见问题。</li>
+<li><strong>支持多行和换行</strong>：Flex容器中的项目可以自动换行，且可以控制行的对齐方式，这为多行布局提供了便利。</li>
+</ol>
+</blockquote>
+<h3 id="什么情况下会使用flex布局？"><a href="#什么情况下会使用flex布局？" class="headerlink" title="什么情况下会使用flex布局？"></a>什么情况下会使用flex布局？</h3><ol>
+<li><p><strong>响应式网页设计</strong>：</p>
+<ul>
+<li>Flex布局可以轻松创建响应式布局，使网页能够适应不同的屏幕尺寸和设备。。</li>
+</ul>
+</li>
+<li><p><strong>居中对齐</strong>：</p>
+<ul>
+<li>Flex布局提供了简便的方法来居中对齐元素，无论是在主轴上还是交叉轴上。</li>
+</ul>
+</li>
+<li><p><strong>导航菜单</strong>：</p>
+<ul>
+<li>Flex布局可以用来创建水平或垂直的导航菜单，易于实现导航项的对齐和分布。</li>
+</ul>
+</li>
+<li><p><strong>多行布局</strong>：</p>
+<ul>
+<li>当Flex容器设置为<code>flex-wrap: wrap;</code>时，可以实现多行布局，适用于创建网格或列表视图。</li>
+</ul>
+</li>
+<li><p><strong>一维布局</strong>：</p>
+<ul>
+<li>当需要在水平或垂直方向上排列元素时，Flex布局可以快速实现线性布局</li>
+</ul>
+</li>
+<li><p><strong>等高列</strong>：</p>
+<ul>
+<li>使用<code>align-items: stretch;</code>可以使Flex项等高，适用于创建等高列的布局。</li>
+</ul>
+</li>
+<li><p><strong>卡片布局</strong>：</p>
+<ul>
+<li>利用Flex布局可以轻松排列一组卡片，实现整齐且响应式的卡片视图。</li>
+</ul>
+</li>
+<li><p><strong>空间分配</strong>：</p>
+<ul>
+<li>Flex布局可以轻松地在元素之间分配空间，使用<code>justify-content</code>和<code>align-items</code>属性。</li>
+</ul>
+</li>
+<li><p><strong>自适应布局</strong>：</p>
+<ul>
+<li>Flex布局中的<code>flex-grow</code>属性允许元素根据可用空间自动调整大小。</li>
+</ul>
+</li>
+<li><p><strong>内容环绕广告或浮动按钮</strong>：</p>
+<ul>
+<li>使用Flex布局可以创建内容区域，其中广告或浮动按钮围绕内容布局。</li>
+</ul>
+</li>
+<li><p><strong>分栏布局</strong></p>
+</li>
+</ol>
+<h4 id="代码示例："><a href="#代码示例：" class="headerlink" title="代码示例："></a>代码示例：</h4><h5 id="两栏、三栏自适应布局"><a href="#两栏、三栏自适应布局" class="headerlink" title="两栏、三栏自适应布局"></a>两栏、三栏自适应布局</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.wrap</span> &#123; <span class="attribute">display</span>: flex; &#125;</span><br><span class="line"><span class="selector-class">.left</span> &#123; <span class="attribute">width</span>: <span class="number">200px</span>; &#125;</span><br><span class="line"><span class="selector-class">.right</span> &#123; <span class="attribute">flex</span>: <span class="number">1</span>; &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="实现子盒子垂直居中"><a href="#实现子盒子垂直居中" class="headerlink" title="实现子盒子垂直居中"></a>实现子盒子垂直居中</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*在父盒子设置*/</span></span><br><span class="line"><span class="selector-class">.wrap</span>&#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">justify-content</span>:center;</span><br><span class="line">    align-item:center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://chammmmy.netlify.app">Chammy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://chammmmy.netlify.app/2025/11/12/flex/">https://chammmmy.netlify.app/2025/11/12/flex/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://chammmmy.netlify.app" target="_blank">Chammy's Blog</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/image/wechat.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/11/12/promise/" title="Promise"><img class="cover" src="/image/wechat.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Promise</div></div><div class="info-2"><div class="info-item-1">在JavaScript的异步编程世界里，我们经常面对复杂的逻辑和难以追踪的错误。你是否曾经在编写JavaScript代码时，被层层嵌套的回调函数弄得焦头烂额？是否在处理并发异步任务时感到力不从心？如果有，那么Promise将是你的救星。它不仅简化了异步代码的结构，还增强了代码的可读性和可维护性。 在本篇文章中，我们将一步步揭开Promise的神秘面纱，深入探索Promise的魔力！ 一、为什么需要Promise Promise支持链式调用，可以解决回调地狱。  Promise指定回调函数的方式更灵活  旧时:必须在启动异步任务前指定回调函数 Promise：启动异步任务 &#x3D;&gt; 返回Promise对象 &#x3D;&gt; 给Promise对象绑定回调函数（甚至可以在异步任务结束后指定多个）    那么什么是回调地狱呢？ 回调 地狱：回调地狱（Callback Hell）是指在使用嵌套回调函数处理异步操作时，代码结构变得复杂和难以维护的问题。这种情况通常发生在需要顺序执行多个异步操作，并且每个操作都依赖于前一个操作的结果时。 回调地狱的表现当多个异步操作需要嵌套在一...</div></div></div></a><a class="pagination-related" href="/2025/11/10/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" title="事件循环"><img class="cover" src="/image/avatar1.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">事件循环</div></div><div class="info-2"><div class="info-item-1">事件循环(eventloop)同步和异步JS是单线程的，也就是说， 同一时间只能做一件事，所有任务需要排队，前一个任务结束之后才会执行下一个任务。  作为浏览器脚本语言，JavaScript的主要用途是和用户互动以及操作DOM，这决定了它只能是单线程  但我们知道，有些任务是耗时的，会阻塞代码的执行。为了解决这个问题，我们引出了同步和异步的概念。可以把代码分为同步代码(同步任务)和异步代码(异步代码)。    异步代码（耗时） 同步代码（立即执行）    先放入宿主环境(浏览器&#x2F;Node) ,不必原地等待结果。（并不阻塞主线程继续往下执行，异步结果在将来执行） 立即放入JS 引擎(JS主线程) 执行,并原地等待结果   setTimeout(一次性定时器） 如console.log(1)   setInterval(定时器) …   Ajax&#x2F;Fetch 事件绑定 …   Promise里的then、catch … …   执行过程（执行栈、宿主环境、任务队列）: 同步代码放入执行栈中，异步代码放在宿主环境，等待时机成熟送入任务队列（ 如绑定的事件被触发或定时...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/image/avatar1.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Chammy</div><div class="author-info-description">342u402842</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/cjhjhkh" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">概念：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E8%BD%B4%E4%B8%8E%E4%BE%A7%E8%BD%B4"><span class="toc-number">1.0.1.</span> <span class="toc-text">主轴与侧轴</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%83%E5%B1%80%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">布局原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93flex%E5%B8%83%E5%B1%80%E5%8E%9F%E7%90%86"><span class="toc-number">2.1.</span> <span class="toc-text">总结flex布局原理:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E5%B1%9E%E6%80%A7"><span class="toc-number">3.</span> <span class="toc-text">常见属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E7%88%B6%E5%AE%B9%E5%99%A8%E8%AE%BE%E7%BD%AE%EF%BC%9A"><span class="toc-number">3.1.</span> <span class="toc-text">对父容器设置：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E5%AD%90%E5%AE%B9%E5%99%A8%E8%AE%BE%E7%BD%AE%EF%BC%9A"><span class="toc-number">3.2.</span> <span class="toc-text">对子容器设置：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-number">3.3.</span> <span class="toc-text">总结：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">4.</span> <span class="toc-text">应用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8flex%E5%B8%83%E5%B1%80%EF%BC%9F"><span class="toc-number">4.1.</span> <span class="toc-text">为什么用flex布局？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%E4%B8%8B%E4%BC%9A%E4%BD%BF%E7%94%A8flex%E5%B8%83%E5%B1%80%EF%BC%9F"><span class="toc-number">4.2.</span> <span class="toc-text">什么情况下会使用flex布局？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="toc-number">4.2.1.</span> <span class="toc-text">代码示例：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%A4%E6%A0%8F%E3%80%81%E4%B8%89%E6%A0%8F%E8%87%AA%E9%80%82%E5%BA%94%E5%B8%83%E5%B1%80"><span class="toc-number">4.2.1.1.</span> <span class="toc-text">两栏、三栏自适应布局</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E5%AD%90%E7%9B%92%E5%AD%90%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD"><span class="toc-number">4.2.1.2.</span> <span class="toc-text">实现子盒子垂直居中</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/11/12/promise/" title="Promise"><img src="/image/wechat.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Promise"/></a><div class="content"><a class="title" href="/2025/11/12/promise/" title="Promise">Promise</a><time datetime="2025-11-12T05:40:26.986Z" title="发表于 2025-11-12 13:40:26">2025-11-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/12/flex/" title="flex"><img src="/image/wechat.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="flex"/></a><div class="content"><a class="title" href="/2025/11/12/flex/" title="flex">flex</a><time datetime="2025-11-12T05:36:49.723Z" title="发表于 2025-11-12 13:36:49">2025-11-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/10/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" title="事件循环"><img src="/image/avatar1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="事件循环"/></a><div class="content"><a class="title" href="/2025/11/10/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" title="事件循环">事件循环</a><time datetime="2025-11-10T12:12:04.018Z" title="发表于 2025-11-10 20:12:04">2025-11-10</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/image/wechat.jpg);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2023 - 2025 By Chammy</span></div><div class="footer_custom_text">每一天都是新的开始QAQ</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.2"></script><script src="/js/main.js?v=5.5.2"></script><script src="/js/tw_cn.js?v=5.5.2"></script><div class="js-pjax"></div><script async data-pjax src="/"></script></div></body></html>

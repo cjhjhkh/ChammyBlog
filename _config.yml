@@ -3,12 +3,15 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title:  Chammy's Blog
 subtitle: ''
 description: ''
 keywords:
-author: John Doe
-language: en
+author: Chammy
+language: zh-CN
+# default(en)
+# zh-CN (简体中文)
+# zh-TW (繁体中文)
 timezone: ''
 
 # URL
@@ -96,7 +99,13 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+# theme: landscape
+# theme: another  #不知道为啥打开没东西。。
+# theme: fluid    #构建的时候找不到模块，报错
+# theme: gallery  不知道为啥图片弄不了，里面也没看到package.json
+# theme: jelly  原始的主题
+# theme: next  #黑白，简单，，一般般
+theme: butterfly  
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
